@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mingrui Xiao — IT Portfolio</title>
+  <style>
+    :root{
+      --bg: #070A12;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.04);
+      --text: rgba(255,255,255,.92);
+      --text-strong: rgba(255,255,255,1);
+      --muted: rgba(255,255,255,.65);
+      --line: rgba(255,255,255,.12);
+      --accent: #7C5CFF;
+      --accent2:#22D3EE;
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --bg-image: url("images/DarkBack.png");
+      --overlay-1: rgba(124,92,255,.25);
+      --overlay-2: rgba(34,211,238,.18);
+      --overlay-3: rgba(124,92,255,.12);
+      --overlay-base: rgba(7,10,18,.65);
+      --nav-bg: rgba(7,10,18,.55);
+      --nav-hover-bg: rgba(255,255,255,.05);
+      --btn-bg: rgba(255,255,255,.05);
+      --btn-border: rgba(255,255,255,.14);
+      --btn-hover-border: rgba(255,255,255,.24);
+      --icon-bg: rgba(255,255,255,.06);
+      --icon-hover-bg: rgba(255,255,255,.14);
+      --icon-hover-border: rgba(255,255,255,.26);
+      --chip-bg: rgba(255,255,255,.03);
+      --chip-text: rgba(255,255,255,.74);
+      --input-bg: rgba(255,255,255,.03);
+      --dot-shadow: rgba(0,0,0,0.4);
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: var(--bg-image) center/cover fixed no-repeat;
+      background-color: var(--bg);
+      overflow-x:hidden;
+      position: relative;
+    }
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(900px 500px at 10% 0%, var(--overlay-1), transparent 55%),
+        radial-gradient(700px 450px at 90% 10%, var(--overlay-2), transparent 55%),
+        radial-gradient(900px 700px at 40% 110%, var(--overlay-3), transparent 60%),
+        var(--overlay-base);
+      pointer-events: none;
+      z-index: 0;
+    }
+    header, main{
+      position: relative;
+      z-index: 1;
+    }
+    body.light{
+      --bg: #f5f7fb;
+      --card: rgba(255,255,255,.92);
+      --card2: rgba(255,255,255,.96);
+      --text: #0d1420;
+      --text-strong: #0b1220;
+      --muted: rgba(13,20,32,.65);
+      --line: rgba(13,20,32,.12);
+      --shadow: 0 18px 40px rgba(16,24,40,.12);
+      --bg-image: url("images/LightBack.png");
+      --overlay-1: rgba(255,255,255,.65);
+      --overlay-2: rgba(255,255,255,.45);
+      --overlay-3: rgba(255,255,255,.35);
+      --overlay-base: rgba(255,255,255,.55);
+      --nav-bg: rgba(255,255,255,.75);
+      --nav-hover-bg: rgba(13,20,32,.06);
+      --btn-bg: rgba(13,20,32,.04);
+      --btn-border: rgba(13,20,32,.14);
+      --btn-hover-border: rgba(13,20,32,.24);
+      --icon-bg: rgba(13,20,32,.04);
+      --icon-hover-bg: rgba(13,20,32,.08);
+      --icon-hover-border: rgba(13,20,32,.2);
+      --chip-bg: rgba(13,20,32,.04);
+      --chip-text: rgba(13,20,32,.7);
+      --input-bg: rgba(13,20,32,.03);
+      --dot-shadow: rgba(13,20,32,0.18);
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(1100px, 92%); margin:0 auto; }
+
+    /* top nav */
+    header{
+      position:fixed; top:0; left:0; right:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--line);
+    }
+    main{
+      padding-top: 86px;
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 20px rgba(124,92,255,.55);
+    }
+    nav ul{ display:flex; gap:18px; list-style:none; padding:0; margin:0; }
+    nav a{
+      color: var(--muted);
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:10px;
+      transition:.2s;
+    }
+    nav a:hover{ color:var(--text); background: var(--nav-hover-bg); }
+    .navActions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .theme-toggle{
+      width:42px;
+      height:42px;
+      padding:0;
+    }
+    body:not(.light) .theme-toggle{
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.28);
+      color: #fff;
+    }
+    body:not(.light) .theme-toggle:hover{
+      border-color: rgba(255,255,255,.4);
+    }
+    .theme-toggle svg{
+      width:20px;
+      height:20px;
+      fill: currentColor;
+    }
+    .theme-toggle .icon-moon svg{ fill: currentColor; }
+    .theme-toggle .icon-sun svg{
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .theme-toggle .icon-sun{ display:none; }
+    .theme-toggle .icon-moon{ display:block; }
+    body.light .theme-toggle .icon-sun{ display:block; }
+    body.light .theme-toggle .icon-moon{ display:none; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px; border-radius:12px;
+      border:1px solid var(--btn-border);
+      background: var(--btn-bg);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      font-weight:700;
+      color: var(--text);
+      gap:10px;
+      transition:.2s;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: var(--btn-hover-border); }
+    .btn.primary{
+      border:1px solid var(--btn-border);
+      background: var(--btn-bg);
+      color: var(--text);
+    }
+
+    /* hero */
+    .hero{ padding: 58px 0 26px; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr; /* only one card now */
+      gap: 22px;
+      align-items:stretch;
+    }
+    .card{
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border:1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .heroMain{ padding: 26px; position:relative; }
+
+    /* new hero layout */
+    .heroHeader{
+      display:flex;
+      align-items:flex-start;
+      gap:20px;
+      margin-bottom: 14px;
+    }
+    .heroPhoto{
+      width:96px;
+      height:96px;
+      border-radius:999px;
+      overflow:hidden;
+      border:2px solid var(--line);
+      box-shadow: 0 14px 30px rgba(0,0,0,.45);
+      flex-shrink:0;
+      background:#111827;
+    }
+    .heroPhoto img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .socialIcons{
+      position:absolute;
+      top:18px;
+      right:22px;
+      display:flex;
+      gap:16px;
+    }
+    .socialIcon{
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: var(--icon-bg);
+      border:1px solid var(--line);
+      transition:.2s;
+    }
+    .socialIcon:hover{
+      background: var(--icon-hover-bg);
+      transform: translateY(-1px);
+      border-color: var(--icon-hover-border);
+    }
+    .socialIcon svg{
+      width:22px;
+      height:22px;
+      fill:var(--text);
+    }
+
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      color: var(--muted);
+      border:1px solid var(--line);
+      padding:8px 10px;
+      border-radius:999px;
+      background: var(--chip-bg);
+      font-weight:700;
+      font-size: 13px;
+    }
+    .title{
+      margin: 14px 0 8px;
+      font-size: clamp(28px, 4.4vw, 48px);
+      line-height:1.05;
+      letter-spacing:-.8px;
+    }
+    .nameHighlight{ color: var(--text-strong); }
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 60ch;
+    }
+    .heroActions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+    .metaRow{
+      display:flex; gap:14px; flex-wrap:wrap;
+      margin-top:18px;
+      color: var(--muted);
+      font-weight:600;
+      font-size: 13px;
+    }
+    .metaPill{
+      border:1px solid var(--line);
+      background: var(--chip-bg);
+      padding:8px 10px;
+      border-radius: 999px;
+    }
+    .form-input{
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: var(--input-bg);
+      color: var(--text);
+    }
+    .form-textarea{
+      margin-top:10px;
+      width:100%;
+      resize: vertical;
+    }
+    body.light .form-input{
+      border-color: rgba(13,20,32,.2);
+    }
+
+    /* sections */
+    section{ padding: 22px 0; }
+    .sectionHead{
+      display:flex; justify-content:space-between; align-items:end; gap:16px;
+      margin-bottom: 12px;
+    }
+    h2{ margin:0; font-size: 20px; letter-spacing:-.2px; }
+    .hint{ margin:0; color: var(--muted); font-size: 13px; }
+    .cards3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .item{ padding: 16px; }
+    .item h3{ margin:0 0 6px; font-size: 16px; }
+    .item p{ margin:0; color: var(--muted); line-height: 1.6; font-size: 14px; }
+    .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .tag{
+      font-size: 12px;
+      color: var(--chip-text);
+      border:1px solid var(--line);
+      background: var(--chip-bg);
+      padding:6px 8px;
+      border-radius:999px;
+      font-weight:700;
+    }
+
+    .skills-section {
+      margin-top: 4rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: radial-gradient(
+          120% 120% at 10% 10%,
+          rgba(124, 92, 255, 0.08),
+          rgba(0, 0, 0, 0.2)
+        ),
+        rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 1.5rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124, 92, 255, 0.5);
+    }
+
+    .skill-card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .skill-card p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .skill-tags span {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ===== PROJECTS (same style as Skills & Expertise) ===== */
+
+    .projects-section {
+      margin-top: 4rem;
+    }
+
+    .cards3 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .cards3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card base */
+    .card.item {
+      background:
+        radial-gradient(
+          120% 120% at 10% 10%,
+          rgba(124, 92, 255, 0.08),
+          rgba(0, 0, 0, 0.25)
+        ),
+        rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 1.6rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Hover effect */
+    .card.item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124, 92, 255, 0.5);
+      box-shadow:
+        0 0 0 1px rgba(124, 92, 255, 0.25),
+        0 25px 55px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Titles */
+    .card.item h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    /* Description */
+    .card.item p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .project-desc p {
+      margin: 0 0 0.8rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.95rem;
+    }
+
+    .project-desc p strong {
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 600;
+    }
+
+    body.light .skill-card,
+    body.light .card.item{
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 30px rgba(16,24,40,.12);
+    }
+    body.light .skill-card p,
+    body.light .card.item p,
+    body.light .project-desc p{
+      color: var(--muted);
+    }
+    body.light .skill-tags span,
+    body.light .tag{
+      background: var(--chip-bg);
+      border: 1px solid rgba(13,20,32,.2);
+      color: var(--text);
+    }
+    body.light .metaPill{
+      background: var(--chip-bg);
+      border: 1px solid rgba(13,20,32,.2);
+      color: var(--text);
+    }
+    body.light .project-desc p strong{
+      color: var(--text-strong);
+    }
+
+    /* Bullet version */
+    .project-list {
+      padding-left: 1.1rem;
+      margin: 0.8rem 0 0;
+    }
+
+    .project-list li {
+      margin-bottom: 0.6rem;
+      line-height: 1.6;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ===== Project image (Project Highlights style) ===== */
+    .project-card {
+      padding: 1.2rem; /* slightly tighter to fit image */
+    }
+
+    .project-media {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--chip-bg);
+      margin-bottom: 1rem;
+      aspect-ratio: 16 / 9;
+    }
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1);
+      transition: transform 0.35s ease;
+    }
+
+    .project-card:hover .project-media img {
+      transform: scale(1.03);
+    }
+
+    /* timeline */
+    .timeline{
+      position: relative;
+      display:grid;
+      gap: 24px;
+    }
+    .timeline::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      top: 6px;
+      bottom: 6px;
+      width:2px;
+      background: var(--line);
+      transform: translateX(-50%);
+    }
+    .timeline-item{
+      display:grid;
+      grid-template-columns: 1fr 56px 1fr;
+      align-items:flex-start;
+      position: relative;
+    }
+    .timeline-dot{
+      grid-column: 2;
+      justify-self:center;
+      margin-top: 6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--dot-shadow), 0 0 0 6px var(--line);
+    }
+    .timeline-content{
+      padding: 16px;
+    }
+    .timeline-item.left .timeline-content{ grid-column: 1; }
+    .timeline-item.right .timeline-content{ grid-column: 3; }
+    .timeline-date{
+      color: var(--muted);
+      font-weight:700;
+      font-size: 13px;
+      white-space:nowrap;
+      margin-top: 4px;
+    }
+    .timeline-item.left .timeline-date{
+      grid-column: 3;
+      text-align: left;
+    }
+    .timeline-item.right .timeline-date{
+      grid-column: 1;
+      text-align: right;
+    }
+    .timeline-title{
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .timeline-meta{
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .timeline-bullets{
+      margin: 8px 0 0 18px;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .timeline-bullets li{ margin: 4px 0; }
+
+    /* scroll reveal */
+    .reveal{
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.reveal-left{ transform: translateX(-28px); }
+    .reveal.reveal-right{ transform: translateX(28px); }
+    .reveal.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal.reveal-left.show,
+    .reveal.reveal-right.show{
+      transform: translateX(0);
+    }
+    @media (prefers-reduced-motion: reduce){
+      .reveal,
+      .reveal.show{
+        transition: none;
+        transform: none;
+        opacity: 1;
+      }
+    }
+
+    /* footer */
+    footer{
+      padding: 24px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 14px;
+    }
+
+    /* responsive */
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+      .cards3{ grid-template-columns: 1fr; }
+      nav ul{ display:none; }
+      .heroHeader{
+        flex-direction:row;
+      }
+      .timeline::before{ left: 16px; }
+      .timeline-item{
+        grid-template-columns: 24px 1fr;
+        gap: 12px;
+      }
+      .timeline-dot{ grid-column: 1; }
+      .timeline-item.left .timeline-content,
+      .timeline-item.right .timeline-content{
+        grid-column: 2;
+      }
+      .timeline-item.left .timeline-date,
+      .timeline-item.right .timeline-date{
+        grid-column: 2;
+        text-align: left;
+        margin: 0 0 6px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Mingrui Xiao.dev</span>
+      </div>
+
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="navActions">
+        <button id="themeToggle" class="btn theme-toggle" type="button" aria-pressed="false" aria-label="Toggle theme" title="Toggle theme">
+          <span class="icon-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 14.5A8.5 8.5 0 0 1 9.5 3a1 1 0 0 0-.98 1.24A7 7 0 0 0 17.76 15.5 1 1 0 0 0 19 14.52 8.4 8.4 0 0 1 21 14.5z"></path>
+            </svg>
+          </span>
+          <span class="icon-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="M4.93 4.93l1.41 1.41"></path>
+              <path d="M17.66 17.66l1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="M4.93 19.07l1.41-1.41"></path>
+              <path d="M17.66 6.34l1.41-1.41"></path>
+            </svg>
+          </span>
+        </button>
+        <a class="btn" href="#contact">Let's talk →</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="grid">
+        <div class="card heroMain">
+          <!-- social icons top-right -->
+          <div class="socialIcons">
+            <a class="socialIcon" href="https://github.com/MeieiShaw" target="_blank" aria-label="GitHub">
+              <!-- GitHub icon -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.36 1.08 2.94.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 6.84c.85 0 1.71.11 2.51.32 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.67-4.57 4.92.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .26.18.58.69.48A10 10 0 0 0 12 2Z"></path>
+              </svg>
+            </a>
+            <a class="socialIcon" href="https://www.linkedin.com/in/mingruixiao" target="_blank" aria-label="LinkedIn">
+              <!-- LinkedIn icon -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5.001zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.14V21h-4v-4.5c0-1.07-.02-2.45-1.49-2.45-1.5 0-1.73 1.16-1.73 2.37V21h-4z"></path>
+              </svg>
+            </a>
+          </div>
+
+          <div class="heroHeader">
+            <!-- your picture top-left -->
+            <div class="heroPhoto">
+              <img src="images/mingrui.jpg" alt="Mingrui Xiao" />
+            </div>
+
+            <div>
+              <div class="kicker">About Myself</div>
+              <h1 class="title">Hi, I am <span class="nameHighlight">Mingrui Xiao</span></h1>
+              <p class="subtitle">
+                Nice to meet you! I am a Software Engineer focused on <b>React + TypeScript</b>, <b>Node/Java</b>, and
+                <b>cloud-native delivery</b>. I like shipping products with clean UX, solid APIs, and reliable DevOps.
+              </p>
+            </div>
+          </div>
+
+          <div class="heroActions">
+            <a class="btn primary" href="#projects">View Projects</a>
+            <a class="btn" href="assets/resume/Shawn Xiao's Resume.pdf" download="Shawn Xiao's Resume.pdf">Download My Resume</a>
+          </div>
+
+          <div class="metaRow">
+            <span class="metaPill">Sydney, AU</span>
+            <span class="metaPill">Full-Stack / Cloud / AI</span>
+            <span class="metaPill">Open to roles</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills-section" id="skills">
+      <h2 class="section-title">Skills</h2>
+
+      <div class="skills-grid">
+        <!-- Frontend -->
+        <div class="skill-card">
+          <h3>Full-Stack Development & Cloud Architecture</h3>
+          <p>
+            I build scalable, secure, and user-centric web applications from frontend to cloud infrastructure.
+          </p>
+          <div class="skill-tags">
+            <span>React</span>
+            <span>Vue</span>
+            <span>JavaScript</span>
+            <span>TypeScript</span>
+            <span>Java</span>
+            <span>Python</span>
+            <span>Spring Boot</span>
+            <span>Node.js</span>
+            <span>Docker</span>
+            <span>Azure</span>
+            <span>AWS</span>
+            <span>GitHub</span>
+            <span>Next.js</span>
+            <span>MUI</span>
+            <span>Tailwind</span>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="skill-card">
+          <h3>Backend Systems, APIs & Data Engineering</h3>
+          <p>
+            I design reliable backend systems that power data-driven and distributed applications.
+          </p>
+          <div class="skill-tags">
+            <span>Node.js</span>
+            <span>RESTful API</span>
+            <span>Microservices </span>
+            <span>PostgreSQL </span>
+            <span>MongoDB </span>
+            <span>SQL Server</span>
+            <span>Prisma</span>
+            <span>Spring Boot</span>
+          </div>
+        </div>
+
+        <!-- Cloud & DevOps -->
+        <div class="skill-card">
+          <h3>Generative AI & Machine Learning</h3>
+          <p>
+            I build practical GenAI solutions that enhance productivity and decision-making.
+          </p>
+          <div class="skill-tags">
+            <span>OpenAI API</span>
+            <span>LangChain </span>
+            <span>RAG</span>
+            <span>PyTorch</span>
+            <span>TensorFlow</span>
+            <span>CUDA</span>
+            <span>Deep Learning</span>
+            <span>Model Training</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="projects-section">
+      <div class="sectionHead">
+        <h2>Projects</h2>
+      </div>
+
+      <div class="cards3">
+        <div class="card item project-card">
+          <div class="project-media">
+            <img src="images/CMS.png" alt="Farm Management CMS screenshot" loading="lazy">
+          </div>
+          <h3>Farm Management CMS</h3>
+          <ul class="project-list">
+            <li>
+              Built a centralized Farm Management CMS managing
+              <strong>2000+</strong> assets, activities, and bookings
+              using React (TypeScript) and Azure Functions.
+            </li>
+            <li>
+              Designed core modules including Farm, Asset, Activity, Booking,
+              Feature Tag, and User Management with Prisma and Azure SQL.
+            </li>
+            <li>
+              Implemented secure role-based access control using Microsoft Entra ID.
+            </li>
+            <li>
+              Developed accessible, responsive UI with MUI and global theming.
+            </li>
+            <li>
+              Integrated Azure Blob Storage and optimized backend API performance.
+            </li>
+            <li>
+              Built CI/CD pipelines reducing deployment time from
+              <strong>10 min → 2 min</strong>.
+            </li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Full-Stack</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Azure Functions</span>
+            <span class="tag">Prisma</span>
+            <span class="tag">Azure SQL</span>
+            <span class="tag">RBAC</span>
+            <span class="tag">CI/CD</span>
+          </div>
+        </div>
+
+        <div class="card item project-card">
+          <div class="project-media">
+            <img src="images/food.png" alt="Food Delivery Platform screenshot" loading="lazy">
+          </div>
+          <h3>Food Delivery Platform</h3>
+          <ul class="project-list">
+            <li>
+              Led a <strong>7-member cross-functional team</strong> to build a food delivery
+              platform serving <strong>3,000+ users</strong> in the Nagoya region.
+            </li>
+            <li>
+              Designed, developed, and launched a full-stack food delivery application
+              using <strong>C#</strong>, <strong>.NET</strong>, and
+              <strong>Microsoft SQL Server</strong>.
+            </li>
+            <li>
+              Improved order-processing efficiency by <strong>50%</strong> through backend
+              optimizations and database indexing.
+            </li>
+            <li>
+              Reduced rider assignment time by <strong>40%</strong> by optimizing dispatch
+              and routing logic.
+            </li>
+            <li>
+              Built an <strong>Admin Back-Office Management System</strong> to manage riders,
+              restaurants, orders, and attendance, significantly improving operational efficiency.
+            </li>
+            <li>
+              The platform was later <strong>acquired by HungryPanda</strong>, a global food
+              delivery company.
+            </li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Full-Stack</span>
+            <span class="tag">C#</span>
+            <span class="tag">.NET</span>
+            <span class="tag">SQL Server</span>
+            <span class="tag">System Design</span>
+            <span class="tag">Team Leadership</span>
+            <span class="tag">3,000+ Users</span>
+          </div>
+        </div>
+        <div class="card item project-card">
+          <div class="project-media">
+            <img src="images/Fitness.jpg" alt="Smart Trainer UI screenshot" loading="lazy">
+          </div>
+          <h3>Smart Trainer (Pose + LLM)</h3>
+          <ul class="project-list">
+            <li>
+              Trained a PyTorch pose estimation model 
+              achieving <strong>92%</strong> detection accuracy for 
+              major joints in standard fitness movements.
+            </li>
+            <li>
+              Implemented real-time inference pipeline reducing frame processing latency to &lt; <strong>80</strong>ms.
+            </li>
+            <li>
+              Using flask to connect python backend to react frontend.
+            </li>
+            <li>
+              A smart agent function to analysis and generate plans to trainee, using <strong>LangChain</strong> to link ChatGPT API.
+            </li>
+            <li>
+              Using springboot framework connect PostgreSQL database to store record and exercise dataforagentto analysis.
+            </li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Computer Vision</span>
+            <span class="tag">PyTorch</span>
+            <span class="tag">Real-Time AI</span>
+            <span class="tag">LLM Agent</span>
+            <span class="tag">LangChain</span>
+          </div>
+        </div>
+        <div class="card item project-card">
+          <div class="project-media">
+            <img src="images/GAN.png" alt="GAN research sample output" loading="lazy">
+          </div>
+        <h3>Research: GAN-Based Image Generation</h3>
+
+        <ul class="project-list">
+          <li>
+            Conducted research on <strong>Generative Adversarial Networks (GANs)</strong>,
+            focusing on feature-controlled image generation.
+          </li>
+          <li>
+            Improved <strong>StyleGAN2</strong> architecture to enhance image quality and
+            feature consistency.
+          </li>
+          <li>
+            Designed and trained deep learning models using
+            <strong>Python</strong> in a <strong>Linux</strong> environment.
+          </li>
+          <li>
+            Leveraged <strong>CUDA</strong> acceleration with
+            <strong>PyTorch</strong> and <strong>TensorFlow</strong>
+            to optimize model training performance.
+          </li>
+          <li>
+            Published a research thesis in <strong>Japan</strong>,
+            demonstrating practical advancements in GAN-based image synthesis.
+          </li>
+        </ul>
+
+        <div class="tags">
+          <span class="tag">Machine Learning</span>
+          <span class="tag">GAN</span>
+          <span class="tag">StyleGAN2</span>
+          <span class="tag">PyTorch</span>
+          <span class="tag">CUDA</span>
+          <span class="tag">Linux</span>
+        </div>
+      </div>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="sectionHead">
+        <h2>Experience</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item left reveal-left">
+          <div class="card timeline-content">
+            <div class="timeline-title">Full Stack Developer</div>
+            <div class="timeline-meta">Sydney Chinese School • Sydney</div>
+            <ul class="timeline-bullets">
+              <li>Optimised and enhanced the school’s existing website, delivering improvements across front-end UI/UX and back-end data processing to improve system stability and user experience.</li>
+              <li>Designed and developed a new CRM system, integrating legacy school systems with Google Admin to centrally manage data for 400+ students and administrative staff, significantly improving data consistency and operational efficiency.</li>
+              <li>Implemented modern LLM-based features within the new system to automate workflows, support intelligent data processing, and enhance administrative productivity.</li>
+              <li>Collaborated closely with administrative teams to analyse requirements, streamline student–teacher data management processes, and reduce manual workload.</li>
+            </ul>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Nov 2025 — Present</div>
+        </div>
+
+        <div class="timeline-item right reveal-right">
+          <div class="card timeline-content">
+            <div class="timeline-title">Master of Information Technology and Master of Information Technology Management</div>
+            <div class="timeline-meta">The University of Sydney • Sydney, Australia</div>
+            <ul class="timeline-bullets">
+              <li>Master of Information Technology and Master of Information Technology Management.</li>
+            </ul>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Jul 2023 — Jul 2025</div>
+        </div>
+
+        <div class="timeline-item left reveal-left">
+          <div class="card timeline-content">
+            <div class="timeline-title">Software Engineer</div>
+            <div class="timeline-meta">ECO JAPAN K.K. • Japan</div>
+            <ul class="timeline-bullets">
+              <li>Led a 7-member cross-functional team to build a food delivery platform used by 3,000+ local customers in the Nagoya region.</li>
+              <li>Designed, developed, and launched a food delivery application, QING QI SU DA, using C#, .NET, and Microsoft SQL Server, which was later acquired by HungryPanda, a major global food delivery platform.</li>
+              <li>Increased order-processing efficiency by 50% through backend optimizations and database indexing using Microsoft SQL Server.</li>
+              <li>Reduced rider assignment time by 40% through optimized dispatch logic.</li>
+              <li>Built an Administrator Back-Office Management System to manage rider profiles, restaurant partners, delivery orders, and time/attendance tracking, enhancing operational efficiency.</li>
+            </ul>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Mar 2020 — Dec 2020</div>
+        </div>
+
+        <div class="timeline-item right reveal-right">
+          <div class="card timeline-content">
+            <div class="timeline-title">Volunteer | Tutor</div>
+            <div class="timeline-meta">YWCA • Japan</div>
+            <ul class="timeline-bullets">
+              <li>Teaching high and middle-school students Japanese and Mathematics.</li>
+            </ul>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Sep 2017 — Jun 2023</div>
+        </div>
+
+        <div class="timeline-item left reveal-left">
+          <div class="card timeline-content">
+            <div class="timeline-title">Bachelor of Mathematics</div>
+            <div class="timeline-meta">NANZAN University • Nagoya, Aichi, Japan</div>
+            <ul class="timeline-bullets">
+              <li>Bachelor of Mathematics.</li>
+            </ul>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Apr 2019 — Mar 2023</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="sectionHead">
+        <h2>Contact</h2>
+      </div>
+
+      <div class="card item">
+        <p style="margin-bottom:12px;">
+          Email: <a href="mailto:you@email.com" style="text-decoration:underline;">shawnxiao.jobs@email.com</a> 
+          
+        </p>
+
+        <form onsubmit="event.preventDefault(); alert('Thanks! Replace this with your form handler.');">
+          <div style="display:grid; gap:10px; grid-template-columns:1fr 1fr;">
+            <input required placeholder="Your name" class="form-input" />
+            <input required type="email" placeholder="Email" class="form-input" />
+          </div>
+          <textarea required placeholder="Message" rows="4" class="form-input form-textarea"></textarea>
+          <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn primary" type="submit">Send message</button>
+            <button class="btn" type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})">Back to top</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        © <span id="year"></span> Mingrui Xiao
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    var downloadResume = document.getElementById("downloadResume");
+    if (downloadResume) {
+      downloadResume.addEventListener("click", function(e) {
+        e.preventDefault();
+        var content = "Mingrui Xiao — Resume\nEmail: you@email.com\nGitHub: github.com/yourname\nLinkedIn: linkedin.com/in/yourname\n\nSummary:\n- Full-stack developer focusing on modern web and cloud.\n";
+        var blob = new Blob([content], { type: "text/plain" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "Mingrui Xiao's Resume.txt";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    var themeToggle = document.getElementById("themeToggle");
+    var savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+      document.body.classList.add("light");
+    }
+    function updateThemeToggle(){
+      if (!themeToggle) return;
+      var isLight = document.body.classList.contains("light");
+      themeToggle.setAttribute("aria-pressed", String(isLight));
+      themeToggle.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
+      themeToggle.setAttribute("title", isLight ? "Switch to dark mode" : "Switch to light mode");
+    }
+    updateThemeToggle();
+    if (themeToggle) {
+      themeToggle.addEventListener("click", function(){
+        document.body.classList.toggle("light");
+        localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
+        updateThemeToggle();
+      });
+    }
+
+    var revealTargets = Array.from(document.querySelectorAll(".sectionHead, .card, .timeline-item"));
+    revealTargets.forEach(function(el){
+      el.classList.add("reveal");
+      if (el.classList.contains("reveal-left") || el.classList.contains("reveal-right")) {
+        return;
+      }
+      if (el.classList.contains("timeline-item")) {
+        if (el.classList.contains("left")) el.classList.add("reveal-left");
+        if (el.classList.contains("right")) el.classList.add("reveal-right");
+      }
+    });
+
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+
+    revealTargets.forEach(function(el){ observer.observe(el); });
+  </script>
+</body>
+</html>
