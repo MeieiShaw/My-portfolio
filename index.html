@@ -1179,7 +1179,9 @@
       var counterEl = document.getElementById("visitorCount");
       if (!counterEl) return;
 
-      var endpoint = "https://api.countapi.xyz/hit/mingruixiao.com.au/portfolio";
+      // Replace with your Cloudflare Worker endpoint after deployment.
+      // Example: https://<your-worker>.<your-subdomain>.workers.dev/hit/portfolio
+      var endpoint = "https://YOUR_WORKER_SUBDOMAIN.workers.dev/hit/portfolio";
 
       fetch(endpoint)
         .then(function(res){ return res.json(); })
