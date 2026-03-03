@@ -176,10 +176,11 @@
       color: var(--text);
     }
 
+    /* hero */
     .hero{ padding: 58px 0 26px; }
     .grid{
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr; /* only one card now */
       gap: 22px;
       align-items:stretch;
     }
@@ -192,6 +193,7 @@
     }
     .heroMain{ padding: 26px; position:relative; }
 
+    /* new hero layout */
     .heroHeader{
       display:flex;
       align-items:flex-start;
@@ -298,6 +300,7 @@
       border-color: rgba(13,20,32,.2);
     }
 
+    /* sections */
     section{ padding: 22px 0; }
     .sectionHead{
       display:flex; justify-content:space-between; align-items:end; gap:16px;
@@ -1105,6 +1108,7 @@
     <footer>
       <div class="container">
         © <span id="year"></span> Mingrui Xiao
+        &nbsp;|&nbsp; Visitors: <span id="visitorCount">...</span>
       </div>
     </footer>
   </main>
@@ -1170,6 +1174,26 @@
     }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
 
     revealTargets.forEach(function(el){ observer.observe(el); });
+
+    (function(){
+      var counterEl = document.getElementById("visitorCount");
+      if (!counterEl) return;
+
+      var endpoint = "https://api.countapi.xyz/hit/mingruixiao.com.au/portfolio";
+
+      fetch(endpoint)
+        .then(function(res){ return res.json(); })
+        .then(function(data){
+          if (typeof data.value === "number") {
+            counterEl.textContent = data.value.toLocaleString();
+          } else {
+            counterEl.textContent = "N/A";
+          }
+        })
+        .catch(function(){
+          counterEl.textContent = "N/A";
+        });
+    })();
   </script>
 </body>
 </html>
